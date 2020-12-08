@@ -2,6 +2,14 @@ package aoc01
 
 import java.io.File
 
+fun <T> List<T>.combinations(r: Int, start: Int = 0): List<List<T>> =
+    if (r <= size - start) {
+        (start..size-start-r).flatMap {
+            combinations(r-1, start+1)
+        }
+    } else listOf<List<T>>()
+
+
 fun <T> List<T>.combinationsOfTwo(): List<Pair<T, T>> =
     (0..size - 2).flatMap { outer ->
         (outer + 1 until size).map { inner ->
@@ -23,11 +31,11 @@ fun main(args: Array<String>) {
         .readLines()
         .map { it.toInt() }
         .run {
-            combinationsOfTwo()
-                .filter { it.first + it.second == 2020 }
-                .map { println(it); println(it.first * it.second) }
-            combinationsOfThree()
-                .filter { it.first + it.second + it.third == 2020 }
-                .forEach { println(it); println(it.first * it.second * it.third) }
+            combinations(2)
+                .filter { it[0] + it[1] == 2020 }
+                .map { println(it); println(it[0] * it[1]) }
+            combinations(3)
+                .filter { it[0] + it[1] + it[2] == 2020 }
+                .forEach { println(it); println(it[0] * it[1] * it[2]) }
         }
 }
