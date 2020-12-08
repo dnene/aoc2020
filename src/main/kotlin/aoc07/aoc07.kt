@@ -11,7 +11,6 @@ data class Bag(val name: String, val contained: List<Pair<Int, String>>) {
     }.sum()
 }
 
-
 fun main() {
     val PATTERN_1 = Pattern.compile("^(\\w* \\w*) bags contain (.*)")
     val PATTERN_2 = Pattern.compile("^(\\d*) (\\w* \\w*) bag.*")
